@@ -18,8 +18,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- Confetti JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <!-- Supabase JS CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -80,6 +79,7 @@
 <body class="relative">
   <!-- Partículas de corazones flotantes de fondo -->
   <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+  
   <!-- Barra superior de navegación / indicador romántico -->
   <header class="fixed top-0 left-0 right-0 z-40 bg-white/70 backdrop-blur-md border-b border-pink-100 shadow-sm transition-all duration-300">
     <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -92,6 +92,7 @@
       </nav>
     </div>
   </header>
+
   <main class="relative z-10 pt-20">
     <!-- SECCIÓN 1: La foto que más me gusta -->
     <section id="foto" class="min-h-screen flex flex-col justify-center items-center px-4 py-16 text-center">
@@ -106,6 +107,7 @@
         <p class="text-gray-600 text-sm md:text-base max-w-md mb-8">
           De todos los momentos que hemos compartido, este refleja exactamente la magia y alegría de tenerte conmigo.
         </p>
+        
         <!-- Polaroid Card -->
         <div class="polaroid bg-white p-5 pb-8 rounded-2xl border border-pink-100 w-full max-w-sm sm:max-w-md mx-auto transform rotate-1 hover:rotate-0 transition-transform duration-300">
           <div class="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden bg-pink-50 border border-gray-100 shadow-inner flex items-center justify-center group">
@@ -122,6 +124,7 @@
             <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">El mejor instante de mi vida</p>
           </div>
         </div>
+        
         <div class="mt-10 animate-bounce text-pink-400">
           <a href="#mapa" class="flex flex-col items-center text-xs font-medium gap-1 hover:text-pink-600">
             <span>Desliza para ver más</span>
@@ -132,6 +135,7 @@
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 2: Dónde empezó nuestra historia -->
     <section id="mapa" class="min-h-screen flex flex-col justify-center items-center px-4 py-16 bg-gradient-to-b from-white via-pink-50/50 to-white">
       <div class="max-w-3xl w-full mx-auto text-center">
@@ -145,24 +149,23 @@
         <p class="text-gray-600 text-sm md:text-base max-w-lg mx-auto mb-6">
           En este rinconcito del mundo se cruzaron nuestros caminos y mi vida cambió para siempre.
         </p>
+        
         <!-- Contenedor del Mapa -->
         <div class="bg-white p-4 sm:p-6 rounded-3xl shadow-xl border border-pink-100 mb-6 relative">
           <div id="mapa-amor" class="w-full h-80 sm:h-96 shadow-inner"></div>
           
-          <!-- Botón o selector rápido para personalizar lugar -->
-          <div class="mt-4 flex flex-wrap gap-2 justify-center items-center text-xs text-gray-500">
-            <!-- AJUSTE AQUÍ: Se cambió el texto por defecto -->
-            <span>📍 <strong>Lugar actual:</strong> Nuestro lugar especial en Bogotá</span>
-            <button onclick="personalizarLugar()" class="text-pink-600 underline font-medium hover:text-pink-800 transition">
-              Cambiar coordenadas de nuestro lugar
-            </button>
+          <!-- Texto del lugar -->
+          <div class="mt-4 flex flex-wrap gap-2 justify-center items-center text-sm text-gray-600 bg-pink-50 py-2 px-4 rounded-full border border-pink-100">
+            <span>📍 <strong>Lugar actual:</strong> Da Quei Matti</span>
           </div>
         </div>
+        
         <div class="bg-pink-100/60 border border-pink-200/80 rounded-2xl p-4 max-w-md mx-auto text-sm text-pink-900 leading-relaxed shadow-sm">
           "Cada vez que paso por aquí no puedo evitar sonreír recordando el primer segundo en que te vi."
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 3: Ruleta de Citas -->
     <section id="ruleta" class="min-h-screen flex flex-col justify-center items-center px-4 py-16">
       <div class="max-w-3xl w-full mx-auto text-center">
@@ -176,6 +179,7 @@
         <p class="text-gray-600 text-sm md:text-base max-w-md mx-auto mb-8">
           Nuestra ruleta mágica de citas. Toca el botón central y deja que el destino decida nuestro próximo plan juntos.
         </p>
+        
         <!-- Contenedor Ruleta -->
         <div class="relative flex flex-col items-center justify-center mb-8">
           
@@ -191,6 +195,7 @@
             </button>
           </div>
         </div>
+        
         <!-- Tarjeta de Resultado -->
         <div id="resultadoCita" class="hidden max-w-md mx-auto bg-white border-2 border-pink-300 rounded-3xl p-6 shadow-xl transition-all transform scale-95 duration-300">
           <span class="text-xs font-bold text-pink-500 uppercase tracking-widest">¡Tenemos un plan perfecto!</span>
@@ -202,6 +207,7 @@
         </div>
       </div>
     </section>
+
     <!-- SECCIÓN 4: Carta Final -->
     <section id="carta" class="min-h-screen flex flex-col justify-center items-center px-4 py-20 bg-gradient-to-b from-white via-pink-100/70 to-rose-100 text-center relative overflow-hidden">
       <div class="max-w-2xl w-full mx-auto relative z-10">
@@ -216,6 +222,7 @@
         <h3 class="text-2xl sm:text-3xl font-romantic text-gray-700 font-bold mb-8">
           Recuérdalo siempre
         </h3>
+        
         <!-- Caja de carta romántica -->
         <div class="bg-white/90 backdrop-blur-md rounded-3xl p-8 sm:p-10 shadow-2xl border border-pink-200 text-left relative">
           <div class="absolute -top-4 -right-4 bg-pink-500 text-white p-3 rounded-2xl shadow-lg transform rotate-12 text-lg">
@@ -233,6 +240,7 @@
             <span class="font-romantic text-2xl text-pink-600 font-bold">Tu persona favorita</span>
           </div>
         </div>
+        
         <!-- Botón interactivo de lluvia de corazones -->
         <div class="mt-8">
           <button onclick="lanzarLluviaAmor()" class="bg-gradient-to-r from-pink-500 via-rose-500 to-pink-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:shadow-pink-300/50 hover:scale-105 active:scale-95 transition-all text-sm flex items-center gap-2 mx-auto">
@@ -246,45 +254,30 @@
       </footer>
     </section>
   </main>
+
   <script>
-    // --- 2. CONFIGURACIÓN DEL MAPA (LEAFLET.JS) ---
-    // AJUSTE AQUÍ: Coordenadas exactas proporcionadas para su lugar especial
-    let lat = 4.675233412981853;
-    let lng = -74.04899449115948;
-    let mapa;
-    let marcador;
+    // --- CONFIGURACIÓN DEL MAPA ---
+    // Coordenadas fijas exactas de su lugar especial
+    const lat = 4.675233412981853;
+    const lng = -74.04899449115948;
     
     function iniciarMapa() {
-      mapa = L.map('mapa-amor', { scrollWheelZoom: false }).setView([lat, lng], 15);
-      // Capa de OpenStreetMap con estilo limpio
+      const mapa = L.map('mapa-amor', { scrollWheelZoom: false, zoomControl: true }).setView([lat, lng], 17);
+      
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; OpenStreetMap'
       }).addTo(mapa);
-      // Marcador con popup romántico
-      marcador = L.marker([lat, lng]).addTo(mapa)
+      
+      L.marker([lat, lng]).addTo(mapa)
         .bindPopup(`
           <div style="text-align:center; font-family: 'Plus Jakarta Sans', sans-serif;">
-            <b style="color: #db2777; font-size:14px;">Aquí nos conocimos ❤️</b><br>
-            <span style="font-size:12px; color:#6b7280;">El día más lindo de mi calendario</span>
+            <b style="color: #db2777; font-size:14px;">¡Aquí empezó nuestra historia! ✨</b>
           </div>
         `)
         .openPopup();
     }
-    function personalizarLugar() {
-      const nuevoLugar = prompt("Escribe el nombre o coordenadas de su lugar especial (ejemplo: 4.6097, -74.0817):", `${lat}, ${lng}`);
-      if (nuevoLugar) {
-        const partes = nuevoLugar.split(',');
-        if (partes.length === 2 && !isNaN(parseFloat(partes[0])) && !isNaN(parseFloat(partes[1]))) {
-          lat = parseFloat(partes[0]);
-          lng = parseFloat(partes[1]);
-          mapa.setView([lat, lng], 16);
-          marcador.setLatLng([lat, lng]).bindPopup("<b style='color:#db2777'>¡Aquí empezó nuestra historia! ✨</b>").openPopup();
-        } else {
-          alert("Lugar actualizado con cariño en la memoria.");
-        }
-      }
-    }
-    // --- 3. RULETA DE CITAS CON CANVAS ---
+
+    // --- RULETA DE CITAS ---
     const planes = [
       { titulo: "Ir a cenar rico", color: "#fbcfe8", textCol: "#831843" },
       { titulo: "Comer un helado", color: "#fed7aa", textCol: "#7c2d12" },
@@ -295,6 +288,7 @@
       { titulo: "Cafecito y postre", color: "#fce7f3", textCol: "#9d174d" },
       { titulo: "Juegos y risas", color: "#fed7d7", textCol: "#9b2c2c" }
     ];
+    
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
     const totalSegmentos = planes.length;
@@ -308,7 +302,7 @@
       for (let i = 0; i < totalSegmentos; i++) {
         const anguloInicio = anguloActual + i * arc;
         const anguloFin = anguloInicio + arc;
-        // Sector
+        
         ctx.beginPath();
         ctx.fillStyle = planes[i].color;
         ctx.moveTo(radio, radio);
@@ -318,7 +312,7 @@
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#ffffff";
         ctx.stroke();
-        // Texto del plan
+        
         ctx.save();
         ctx.fillStyle = planes[i].textCol;
         ctx.font = "bold 13px 'Plus Jakarta Sans', sans-serif";
@@ -333,23 +327,20 @@
     function girarRuleta() {
       if (estaGirando) return;
       estaGirando = true;
-      // Ocultar resultado anterior
-      const tarjeta = document.getElementById('resultadoCita');
-      tarjeta.classList.add('hidden');
-      // Parámetros de animación
-      const girosCompletos = 5 + Math.floor(Math.random() * 5); // 5 a 9 vueltas
+      document.getElementById('resultadoCita').classList.add('hidden');
+      
+      const girosCompletos = 5 + Math.floor(Math.random() * 5);
       const desplazamientoRandom = Math.random() * 2 * Math.PI;
       const anguloDestino = anguloActual + (girosCompletos * 2 * Math.PI) + desplazamientoRandom;
-      const tiempoTotal = 4000; // 4 segundos
+      const tiempoTotal = 4000;
       const inicioTiempo = performance.now();
       const anguloInicial = anguloActual;
       
       function animarGiro(tiempoActual) {
         const transcurrido = tiempoActual - inicioTiempo;
         const progreso = Math.min(transcurrido / tiempoTotal, 1);
-        
-        // Función de desaceleración suave (easeOutCubic)
         const factorFreno = 1 - Math.pow(1 - progreso, 3);
+        
         anguloActual = anguloInicial + (anguloDestino - anguloInicial) * factorFreno;
         dibujarRuleta();
         
@@ -364,33 +355,25 @@
     }
     
     function finalizarGiro() {
-      // Calcular qué segmento quedó apuntando hacia arriba (3*PI / 2 en canvas)
       const anguloNormalizado = (anguloActual % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
       const anguloFlecha = (3 * Math.PI / 2 - anguloNormalizado + 2 * Math.PI) % (2 * Math.PI);
       const indiceGanador = Math.floor(anguloFlecha / arc);
       const planElegido = planes[indiceGanador];
-      // Mostrar tarjeta con resultado
-      const tarjeta = document.getElementById('resultadoCita');
+      
       document.getElementById('planTexto').textContent = planElegido.titulo;
-      tarjeta.classList.remove('hidden');
-      // Lanzar confeti
+      document.getElementById('resultadoCita').classList.remove('hidden');
+      
       confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.65 },
+        particleCount: 80, spread: 70, origin: { y: 0.65 },
         colors: ['#ec4899', '#f43f5e', '#fb7185', '#fbcfe8']
       });
     }
     
     function celebrarPlan() {
-      confetti({
-        particleCount: 120,
-        spread: 100,
-        origin: { y: 0.7 }
-      });
+      confetti({ particleCount: 120, spread: 100, origin: { y: 0.7 } });
     }
     
-    // --- 4. LLUVIA DE CORAZONES Y DETALLES FLOTANTES ---
+    // --- LLUVIA DE CORAZONES ---
     function crearCorazonFlotante() {
       const container = document.getElementById('hearts-container');
       const corazon = document.createElement('div');
@@ -405,33 +388,18 @@
       setTimeout(() => corazon.remove(), 9000);
     }
     
-    // Generar corazones cada 900ms
     setInterval(crearCorazonFlotante, 900);
     
     function lanzarLluviaAmor() {
-      // Explosión de confeti en forma de fuegos artificiales
       const duracion = 3 * 1000;
       const fin = Date.now() + duracion;
       (function frame() {
-        confetti({
-          particleCount: 5,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 }
-        });
-        confetti({
-          particleCount: 5,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 }
-        });
-        if (Date.now() < fin) {
-          requestAnimationFrame(frame);
-        }
+        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+        if (Date.now() < fin) requestAnimationFrame(frame);
       }());
     }
     
-    // Inicialización al cargar la ventana
     window.onload = function() {
       iniciarMapa();
       dibujarRuleta();
