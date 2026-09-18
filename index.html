@@ -63,7 +63,7 @@
             max-width: 300px;
         }
 
-        /* AHORA LA IMAGEN SE MUESTRA SIEMPRE */
+        /* AJUSTE: La imagen ahora se muestra por defecto */
         .polaroid img {
             width: 100%;
             height: auto;
@@ -84,6 +84,8 @@
         }
 
         .btn-subir:hover { background-color: #b8626f; }
+        
+        /* Se eliminó el estilo del input[type="file"] porque ya no lo necesitamos */
 
         /* --- Sección 2: Mapa --- */
         #seccion-mapa {
@@ -99,6 +101,7 @@
             border: 4px solid white;
         }
 
+        /* Quitamos el fondo blanco que trae Leaflet por defecto en iconos personalizados */
         .mi-icono-corazon {
             background: transparent;
             border: none;
@@ -183,8 +186,8 @@
     <section id="seccion-foto">
         <h2>Nuestra Foto Favorita 💕</h2>
         <div class="polaroid" id="marco-polaroid">
-            <!-- La imagen buscará un archivo llamado "nuestra-foto.jpg" en tu GitHub -->
-            <img id="imagen-pareja" src="nuestra-foto.jpg" alt="El amor de mi vida y yo" />
+            <!-- AJUSTE: Buscamos la foto directamente en tu repositorio de GitHub -->
+            <img id="imagen-pareja" src="nuestra-foto.jpg" alt="Nuestra foto" />
         </div>
         
         <div class="scroll-down" onclick="document.getElementById('seccion-mapa').scrollIntoView();">⬇️ Desliza hacia abajo</div>
@@ -224,9 +227,12 @@
 
     <!-- LOGICA DE PROGRAMACIÓN (JAVASCRIPT) -->
     <script>
+        // (Se eliminó la lógica 1 de subir archivo temporal porque ahora es permanente)
+
         // ----------------------------------------------------
-        // LÓGICA 1: MAPA CON ICONO DE CORAZÓN
+        // LÓGICA 2: MAPA CON ICONO DE CORAZÓN
         // ----------------------------------------------------
+        // Ajustado para centrar cerca del Parque Simón Bolívar
         const latitud = 4.658; 
         const longitud = -74.093;
         
@@ -238,19 +244,21 @@
             maxZoom: 20
         }).addTo(map);
 
+        // Creamos el icono de corazón flotante
         const corazonIcono = L.divIcon({
             html: '<div style="font-size: 35px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: saltar 1s infinite; cursor: pointer;">❤️</div>',
             className: 'mi-icono-corazon',
             iconSize: [35, 35],
-            iconAnchor: [17, 35], 
-            popupAnchor: [0, -35] 
+            iconAnchor: [17, 35], // Asegura que apunte exacto a la coordenada
+            popupAnchor: [0, -35] // Abre el texto un poco más arriba
         });
 
+        // Insertamos el marcador con nuestro nuevo icono y el texto actualizado
         const marker = L.marker([latitud, longitud], { icon: corazonIcono }).addTo(map);
         marker.bindPopup("<div style='text-align:center; color:#d17b88;'><b>Aquí nos conocimos ❤️</b><br>El día más lindo de mi calendario</div>").openPopup();
 
         // ----------------------------------------------------
-        // LÓGICA 2: RULETA DE PLANES
+        // LÓGICA 3: RULETA DE PLANES
         // ----------------------------------------------------
         const canvas = document.getElementById("ruleta");
         const ctx = canvas.getContext("2d");
@@ -333,7 +341,7 @@
         }
 
         // ----------------------------------------------------
-        // LÓGICA 3: LLUVIA DE CORAZONES
+        // LÓGICA 4: LLUVIA DE CORAZONES
         // ----------------------------------------------------
         function crearCorazon() {
             const corazon = document.createElement('div');
