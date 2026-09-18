@@ -31,11 +31,11 @@
             background-color: var(--rosa-claro);
             color: var(--texto);
             text-align: center;
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Hace que el deslizamiento sea suave */
         }
 
         section {
-            min-height: 100vh;
+            min-height: 100vh; /* Cada sección ocupa toda la pantalla */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -63,12 +63,11 @@
             max-width: 300px;
         }
 
-        /* AJUSTE: La imagen ahora se muestra por defecto */
         .polaroid img {
             width: 100%;
             height: auto;
             border-radius: 3px;
-            display: block; 
+            display: block; /* AHORA SE MUESTRA SIEMPRE */
         }
 
         .btn-subir {
@@ -84,8 +83,6 @@
         }
 
         .btn-subir:hover { background-color: #b8626f; }
-        
-        /* Se eliminó el estilo del input[type="file"] porque ya no lo necesitamos */
 
         /* --- Sección 2: Mapa --- */
         #seccion-mapa {
@@ -99,12 +96,6 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border: 4px solid white;
-        }
-
-        /* Quitamos el fondo blanco que trae Leaflet por defecto en iconos personalizados */
-        .mi-icono-corazon {
-            background: transparent;
-            border: none;
         }
 
         /* --- Sección 3: Ruleta --- */
@@ -155,6 +146,7 @@
             z-index: 2;
         }
 
+        /* Animación de corazones flotando */
         .corazon-flotante {
             position: absolute;
             color: rgba(255, 255, 255, 0.6);
@@ -171,7 +163,6 @@
             margin-top: 30px;
             font-size: 24px;
             animation: saltar 1s infinite;
-            cursor: pointer;
         }
 
         @keyframes saltar {
@@ -186,11 +177,11 @@
     <section id="seccion-foto">
         <h2>Nuestra Foto Favorita 💕</h2>
         <div class="polaroid" id="marco-polaroid">
-            <!-- AJUSTE: Buscamos la foto directamente en tu repositorio de GitHub -->
+            <!-- SE CAMBIÓ LA RUTA PARA BUSCAR LA FOTO EN GITHUB -->
             <img id="imagen-pareja" src="nuestra-foto.jpeg" alt="Nuestra foto" />
         </div>
         
-        <div class="scroll-down" onclick="document.getElementById('seccion-mapa').scrollIntoView();">⬇️ Desliza hacia abajo</div>
+        <div class="scroll-down">⬇️ Desliza hacia abajo</div>
     </section>
 
     <!-- SECCIÓN 2: DÓNDE NOS CONOCIMOS -->
@@ -199,7 +190,7 @@
         <p>El lugar donde nuestra historia comenzó...</p>
         <div id="mapa"></div>
         
-        <div class="scroll-down" onclick="document.getElementById('seccion-ruleta').scrollIntoView();">⬇️ Desliza hacia abajo</div>
+        <div class="scroll-down">⬇️ Desliza hacia abajo</div>
     </section>
 
     <!-- SECCIÓN 3: LA RULETA DE PLANES -->
@@ -214,7 +205,7 @@
         
         <button class="btn-subir" onclick="girarRuleta()">¡Girar Ruleta!</button>
         
-        <div class="scroll-down" onclick="document.getElementById('seccion-mensaje').scrollIntoView();">⬇️ Desliza hacia abajo</div>
+        <div class="scroll-down">⬇️ Desliza hacia abajo</div>
     </section>
 
     <!-- SECCIÓN 4: MENSAJE FINAL -->
@@ -222,47 +213,40 @@
         <div class="mensaje-corazon">
             Eres el amor de mi vida,<br>recuérdalo siempre. ❤️
         </div>
+        <!-- Contenedor para los corazones animados -->
         <div id="lluvia-corazones"></div>
     </section>
 
     <!-- LOGICA DE PROGRAMACIÓN (JAVASCRIPT) -->
     <script>
-        // (Se eliminó la lógica 1 de subir archivo temporal porque ahora es permanente)
+        // (Se eliminó la Lógica 1 porque la foto ahora se carga sola desde HTML)
 
         // ----------------------------------------------------
-        // LÓGICA 2: MAPA CON ICONO DE CORAZÓN
+        // LÓGICA 2: MAPA CON CARTO POSITRON (Sin error 403)
         // ----------------------------------------------------
-        // Ajustado para centrar cerca del Parque Simón Bolívar
-        const latitud = 4.658; 
-        const longitud = -74.093;
+        // Coordenadas centrales de Bogotá (puedes cambiarlas luego si deseas)
+        const latitud = 4.6097; 
+        const longitud = -74.0817;
         
-        const map = L.map('mapa').setView([latitud, longitud], 15);
+        const map = L.map('mapa').setView([latitud, longitud], 13);
 
+        // Usamos CARTO Positron para tonos pastel y acceso gratuito sin bloqueos
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
-        // Creamos el icono de corazón flotante
-        const corazonIcono = L.divIcon({
-            html: '<div style="font-size: 35px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); animation: saltar 1s infinite; cursor: pointer;">❤️</div>',
-            className: 'mi-icono-corazon',
-            iconSize: [35, 35],
-            iconAnchor: [17, 35], // Asegura que apunte exacto a la coordenada
-            popupAnchor: [0, -35] // Abre el texto un poco más arriba
-        });
-
-        // Insertamos el marcador con nuestro nuevo icono y el texto actualizado
-        const marker = L.marker([latitud, longitud], { icon: corazonIcono }).addTo(map);
-        marker.bindPopup("<div style='text-align:center; color:#d17b88;'><b>Aquí nos conocimos ❤️</b><br>El día más lindo de mi calendario</div>").openPopup();
+        const marker = L.marker([latitud, longitud]).addTo(map);
+        marker.bindPopup("<b>¡Aquí nos conocimos! ✨</b>").openPopup();
 
         // ----------------------------------------------------
-        // LÓGICA 3: RULETA DE PLANES
+        // LÓGICA 3: RULETA DE PLANES PERSONALIZADA
         // ----------------------------------------------------
         const canvas = document.getElementById("ruleta");
         const ctx = canvas.getContext("2d");
         
+        // ¡Planes especialmente pensados para ustedes!
         const opciones = [
             "Hamburguesas en Chef Burger",
             "Copa Arequipe Crepes & Waffles",
@@ -292,6 +276,7 @@
                 ctx.arc(centro, centro, centro, anguloInicio, anguloFin);
                 ctx.fill();
 
+                // Escribir el texto
                 ctx.save();
                 ctx.translate(centro, centro);
                 ctx.rotate(anguloInicio + arco / 2);
@@ -305,30 +290,36 @@
         dibujarRuleta();
 
         function girarRuleta() {
-            if (girando) return;
+            if (girando) return; // Evita que gire varias veces a la vez
             girando = true;
 
+            // Calcular rotación aleatoria (entre 5 y 10 vueltas completas)
             const vueltas = Math.floor(Math.random() * 5) + 5;
             const gradosExtra = Math.floor(Math.random() * 360);
             rotacionActual += (vueltas * 360) + gradosExtra;
 
             canvas.style.transform = `rotate(${rotacionActual}deg)`;
 
+            // Esperar a que termine la animación (4 segundos de CSS)
             setTimeout(() => {
                 girando = false;
                 
+                // Calcular qué opción ganó
                 const gradosReales = rotacionActual % 360;
+                // Ajuste por la flecha que está en la parte superior (270 grados en el canvas)
                 const ajuste = (360 - gradosReales + 270) % 360;
                 const indiceGanador = Math.floor(ajuste / (360 / opciones.length));
                 
                 const planGanador = opciones[indiceGanador];
 
+                // Lanzar confeti
                 confetti({
                     particleCount: 100,
                     spread: 70,
                     origin: { y: 0.6 }
                 });
 
+                // Mostrar alerta bonita
                 Swal.fire({
                     title: '¡Tenemos un plan!',
                     text: planGanador,
@@ -341,25 +332,31 @@
         }
 
         // ----------------------------------------------------
-        // LÓGICA 4: LLUVIA DE CORAZONES
+        // LÓGICA 4: LLUVIA DE CORAZONES EN EL MENSAJE FINAL
         // ----------------------------------------------------
         function crearCorazon() {
             const corazon = document.createElement('div');
             corazon.classList.add('corazon-flotante');
             corazon.innerHTML = '❤️';
             
+            // Posición aleatoria horizontal
             corazon.style.left = Math.random() * 100 + 'vw';
+            // Tamaño aleatorio
             corazon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            // Duración aleatoria
             corazon.style.animationDuration = (Math.random() * 3 + 2) + 's';
             
             document.getElementById('lluvia-corazones').appendChild(corazon);
             
+            // Eliminarlo después de que suba para no saturar la memoria
             setTimeout(() => {
                 corazon.remove();
             }, 5000);
         }
 
+        // Crear un corazón nuevo cada 300 milisegundos
         setInterval(crearCorazon, 300);
+
     </script>
 </body>
 </html>
