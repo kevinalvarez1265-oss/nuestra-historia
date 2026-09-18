@@ -110,9 +110,8 @@
         <div class="polaroid bg-white p-5 pb-8 rounded-2xl border border-pink-100 w-full max-w-sm sm:max-w-md mx-auto transform rotate-1 hover:rotate-0 transition-transform duration-300">
           <div class="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden bg-pink-50 border border-gray-100 shadow-inner flex items-center justify-center group">
             
-            <!-- AJUSTE AQUÍ: Carga directa de la foto en el repositorio -->
             <img id="polaroid-img" 
-                 src="nuestra-foto.jpeg" 
+                 src="nuestra-foto.jpg" 
                  alt="Nuestra foto favorita" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                  onerror="this.src='https://placehold.co/600x600/ffe4e6/be185d?text=Nosotros+Juntos+❤️'">
@@ -152,7 +151,8 @@
           
           <!-- Botón o selector rápido para personalizar lugar -->
           <div class="mt-4 flex flex-wrap gap-2 justify-center items-center text-xs text-gray-500">
-            <span>📍 <strong>Lugar actual:</strong> Bogotá, Da Quei Matti Chicó</span>
+            <!-- AJUSTE AQUÍ: Se cambió el texto por defecto -->
+            <span>📍 <strong>Lugar actual:</strong> Nuestro lugar especial en Bogotá</span>
             <button onclick="personalizarLugar()" class="text-pink-600 underline font-medium hover:text-pink-800 transition">
               Cambiar coordenadas de nuestro lugar
             </button>
@@ -248,11 +248,12 @@
   </main>
   <script>
     // --- 2. CONFIGURACIÓN DEL MAPA (LEAFLET.JS) ---
-    // Coordenadas por defecto (puedes cambiarlas fácilmente con el botón)
-    let lat = 4.6583;
-    let lng = -74.0938;
+    // AJUSTE AQUÍ: Coordenadas exactas proporcionadas para su lugar especial
+    let lat = 4.675233412981853;
+    let lng = -74.04899449115948;
     let mapa;
     let marcador;
+    
     function iniciarMapa() {
       mapa = L.map('mapa-amor', { scrollWheelZoom: false }).setView([lat, lng], 15);
       // Capa de OpenStreetMap con estilo limpio
@@ -300,6 +301,7 @@
     const arc = (2 * Math.PI) / totalSegmentos;
     let anguloActual = 0;
     let estaGirando = false;
+    
     function dibujarRuleta() {
       const radio = canvas.width / 2;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -327,6 +329,7 @@
         ctx.restore();
       }
     }
+    
     function girarRuleta() {
       if (estaGirando) return;
       estaGirando = true;
@@ -340,6 +343,7 @@
       const tiempoTotal = 4000; // 4 segundos
       const inicioTiempo = performance.now();
       const anguloInicial = anguloActual;
+      
       function animarGiro(tiempoActual) {
         const transcurrido = tiempoActual - inicioTiempo;
         const progreso = Math.min(transcurrido / tiempoTotal, 1);
@@ -348,6 +352,7 @@
         const factorFreno = 1 - Math.pow(1 - progreso, 3);
         anguloActual = anguloInicial + (anguloDestino - anguloInicial) * factorFreno;
         dibujarRuleta();
+        
         if (progreso < 1) {
           requestAnimationFrame(animarGiro);
         } else {
@@ -357,6 +362,7 @@
       }
       requestAnimationFrame(animarGiro);
     }
+    
     function finalizarGiro() {
       // Calcular qué segmento quedó apuntando hacia arriba (3*PI / 2 en canvas)
       const anguloNormalizado = (anguloActual % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
@@ -375,6 +381,7 @@
         colors: ['#ec4899', '#f43f5e', '#fb7185', '#fbcfe8']
       });
     }
+    
     function celebrarPlan() {
       confetti({
         particleCount: 120,
@@ -382,6 +389,7 @@
         origin: { y: 0.7 }
       });
     }
+    
     // --- 4. LLUVIA DE CORAZONES Y DETALLES FLOTANTES ---
     function crearCorazonFlotante() {
       const container = document.getElementById('hearts-container');
@@ -396,8 +404,10 @@
       container.appendChild(corazon);
       setTimeout(() => corazon.remove(), 9000);
     }
+    
     // Generar corazones cada 900ms
     setInterval(crearCorazonFlotante, 900);
+    
     function lanzarLluviaAmor() {
       // Explosión de confeti en forma de fuegos artificiales
       const duracion = 3 * 1000;
@@ -420,6 +430,7 @@
         }
       }());
     }
+    
     // Inicialización al cargar la ventana
     window.onload = function() {
       iniciarMapa();
